@@ -52,8 +52,6 @@ body {
     background: #f4f4f4;
 }
 nav {
-    position: fixed;
-    width: 100%;
     display: flex;
     align-items: center;
     padding: 15px 25px;
@@ -84,10 +82,63 @@ nav {
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
-    color:#333;
+    color: $primary-color;
     display: inline-block;
     position: relative;
 }
+.navlinks-container a::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: $primary-color;
+    transition: transform 0.3s ease-out;
+}
+.navlinks-container a:hover::after {
+    transform: scaleX(1);
+}
+.nav-reseaux {
+    margin-left: auto;
+
+}
+
+@media (max-width:900px) {
+    nav {
+        padding: 15px 20px;
+        position: relative;
+    }
+    .nav-icon {
+        order: 2;
+        margin: 0 auto;
+    }
+    .nav-icon span {
+        font-size: 22px;
+    }
+    .main-navlinks {
+        order: 1;
+    }
+    /* Hamburger */
+    .navlinks-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        background: #fafafa;
+        top: 100%;
+        left: 0;
+        height: 100vh;
+        border-right: 1px solid #c5c5c6;
+    }
+    .nav-reseaux {
+        order: 3;
+    }
+}
+
+
 img {
     width: 20px;
 }
