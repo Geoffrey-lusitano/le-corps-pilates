@@ -8,7 +8,7 @@
                 <span>Le Corps Pilates</span>
             </a>
             <div class="main-navlinks">
-                <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false" v-on:click="navOpen=!navOpen" v-bind:class="{active:navOpen}">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -34,8 +34,16 @@
 
 <script>
 export default {
-  name: 'AppHeader'
+  name: 'AppHeader',
+    var mainNavlinks = new Vue({
+	el: '.main-navlinks',
+	data: {
+		navOpen: true,
+	},
+})
 }
+
+
 </script>
 
 
@@ -122,6 +130,46 @@ nav {
         order: 1;
     }
     /* Hamburger */
+    .hamburger {
+        width:20px;
+        height: 20px;
+        cursor: pointer;
+        border: none;
+        display: flex;
+        background: #fafafa;
+        align-items: center;
+        position: relative;
+    }
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #333;
+        position: absolute;
+        pointer-events: none;
+        transition: opacity 0.3s 0.15s ease-out;
+    }
+    /* hamburger animation */
+    .hamburger span:nth-child(1),
+    .hamburger span:nth-child(3) {
+        transition: transform 0.3s ease-out;
+    }
+    .hamburger span:nth-child(1) {
+        transform: translateY(7px);
+    }
+    .hamburger span:nth-child(3) {
+        transform: translateY(-7px);
+    }
+    .hamburger.open span:nth-child(1) {
+        transform: translate(0) rotate(135deg);
+    }
+    .hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transition: opacity 0s ease-out;
+    }
+    .hamburger.open span:nth-child(3) {
+        transform: translate(0) rotate(-135deg);
+    }
     .navlinks-container {
         display: flex;
         flex-direction: column;
@@ -131,13 +179,30 @@ nav {
         top: 100%;
         left: 0;
         height: 100vh;
+        padding: 15px 50px 15px 20px;
         border-right: 1px solid #c5c5c6;
+        transform: translate(-100%);
+    }
+    .open {
+        transform: translate(0%);
+    }
+    .navlinks-container a {
+        font-size: 18px;
+        margin: 10px 0;
     }
     .nav-reseaux {
         order: 3;
     }
-}
 
+}
+@media (max-width: 500px) {
+    .nav-icon img {
+        width: 30px;
+    }
+    .nav-icon span {
+        font-size: 20px;
+    }
+}
 
 img {
     width: 20px;
