@@ -8,13 +8,13 @@
                 <span>Le Corps Pilates</span>
             </a>
             <div class="main-navlinks">
-                <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false" v-on:click="navOpen=!navOpen" v-bind:class="{active:navOpen}">
+                <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false" v-on:click="navOpen" v-bind:class="{open: isActive}">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
             </div>
-            <div class="navlinks-container">
+            <div class="navlinks-container" v-bind:class="{open: isActive}">
                 <a href="#" aria-current="page">Accueil</a>
                 <a href="#">Présentation</a>
                 <a href="#">Pilates</a>
@@ -34,13 +34,20 @@
 
 <script>
 export default {
-  name: 'AppHeader',
-    var mainNavlinks = new Vue({
-	el: '.main-navlinks',
-	data: {
-		navOpen: true,
-	},
-})
+    name: 'AppHeader',
+    data () {
+        return {
+            isActive: false
+        };
+    },
+    methods: {
+        navOpen: function() {
+            this.isActive = !this.isActive;
+            
+        }
+    }
+
+
 }
 
 
@@ -54,6 +61,7 @@ export default {
     margin: 0;
     padding: 0;
 }
+
 
 body {
     font-family: Montserrat,Helvetica,sans-serif;
@@ -77,7 +85,7 @@ nav {
     font-size: 25px;
     margin-left: 10px;
     font-weight: 400;
-    color: #333;
+    color: $primary-color;
 }
 .nav-icon img {
     width: 40px;
@@ -111,8 +119,13 @@ nav {
 }
 .nav-reseaux {
     margin-left: auto;
-
 }
+.nav-reseaux a {
+    padding: 10px;
+    color: $primary-color;
+}
+
+
 
 @media (max-width:900px) {
     nav {
@@ -180,8 +193,9 @@ nav {
         left: 0;
         height: 100vh;
         padding: 15px 50px 15px 20px;
-        border-right: 1px solid #c5c5c6;
+        //border-right: 1px solid #c5c5c6;
         transform: translate(-100%);
+        transition: transform 0.3s ease-out;
     }
     .open {
         transform: translate(0%);
@@ -192,6 +206,7 @@ nav {
     }
     .nav-reseaux {
         order: 3;
+        margin-left: 0;
     }
 
 }

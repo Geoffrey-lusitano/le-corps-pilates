@@ -15,14 +15,23 @@ export default {
     components: {
         AppHeader,
         AppFooter
+    },
+    head () {
+    return {
+      bodyAttrs: {
+        class: 'reset-body'
+      }
     }
+  }
 }
 
 </script>
 
 <style lang="scss" scoped>
 
-
+.reset-body {
+  margin: 0px !important;
+}
 
 
 </style>
